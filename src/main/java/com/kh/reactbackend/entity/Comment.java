@@ -19,7 +19,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMMENT_ID")
-    private String commentId;
+    private Long commentId;
 
     @Column(name = "CONTENT")
     private String content;
@@ -33,7 +33,7 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    private User user;
+    private Member member;
 
     @PrePersist
     protected void onCreate() {

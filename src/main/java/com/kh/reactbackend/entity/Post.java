@@ -34,11 +34,18 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_WRITER")
-    private User user;
+    private Member member;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Comment> comments = new ArrayList<>();
+
+    public void changeMember(Member member) {
+        this.member = member;
+        if(!member.getPosts().contains(this)) {
+            member.getPosts().add(this);
+        }
+    }
 
     @PrePersist
     protected void onCreate() {
