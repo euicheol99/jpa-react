@@ -8,8 +8,12 @@ import com.kh.reactbackend.repository.MemberRepository;
 import com.kh.reactbackend.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,4 +34,17 @@ public class PostServiceImpl implements PostService{
 
         return post;
     }
+
+    @Override
+    public Page<PostDto.Response> getPostList(Pageable pageable) {
+        Page<Post> page = postRepository.getPosts(pageable);
+        return page.map(PostDto.Response::toSimpleDto);
+    }
+
+    @Override
+    public void deletePost(Long id) {
+        postRepository.deletePost(id);
+    }
+
+
 }

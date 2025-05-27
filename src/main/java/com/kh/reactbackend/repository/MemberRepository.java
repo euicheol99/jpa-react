@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface MemberRepository {
     void save(Member member);
     Optional<Member> findMember(String memberId);
+    Optional<Member> loginMember(String memberId, String password);
 }

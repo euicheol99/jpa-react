@@ -23,4 +23,14 @@ public class MemberRepositoryImpl implements MemberRepository {
     public Optional<Member> findMember(String memberId) {
         return Optional.ofNullable(em.find(Member.class, memberId));
     }
+
+    @Override
+    public Optional<Member> loginMember(String memberId, String password) {
+        String query = "select m from Member as m where m.id = :memberId and m.password = :password";
+        Member member = em.createQuery(query, Member.class)
+                .setParameter("memberId", memberId)
+                .setParameter("password", password)
+                .getSingleResult();
+        return null;
+    }
 }

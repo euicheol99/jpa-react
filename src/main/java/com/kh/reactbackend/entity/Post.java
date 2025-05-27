@@ -15,13 +15,15 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @DynamicUpdate
-@DynamicInsert
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_ID")
     private Long postId;
+
+    @Column(name = "POST_TITLE")
+    private String postTitle;
 
     @Column(name = "STACK")
     private String stack;
@@ -47,9 +49,6 @@ public class Post {
         }
     }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createDate = LocalDateTime.now();
-    }
+
 
 }

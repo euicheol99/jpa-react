@@ -26,4 +26,11 @@ public class MemberController {
     public ResponseEntity<MemberDto.Response> getMember(@PathVariable String memberId) {
         return ResponseEntity.ok(memberService.findMember(memberId));
     }
+
+    @GetMapping("/{memberId}/{password}")
+    public ResponseEntity<MemberDto.Response> loginMember(@PathVariable String memberId, @PathVariable String password) {
+        return ResponseEntity.ok(memberService.loginMember(memberId,password));
+    }
+
+
 }

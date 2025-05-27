@@ -6,4 +6,5 @@ import com.kh.reactbackend.entity.Member;
 public interface MemberService {
     Member createMember(MemberDto.Create memberDto);
     MemberDto.Response findMember(String memberId);
+    MemberDto.Response loginMember(String memberId, String password);
 }

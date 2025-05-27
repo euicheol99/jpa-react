@@ -30,7 +30,7 @@ public class Member {
     @Column(name = "EMAIL", length = 30)
     private String email;
 
-    @OneToMany(mappedBy = "postWriter", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)

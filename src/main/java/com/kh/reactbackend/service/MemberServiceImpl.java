@@ -28,4 +28,11 @@ public class MemberServiceImpl implements MemberService {
                 .map(MemberDto.Response::toDto)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
     }
+
+    @Override
+    public MemberDto.Response loginMember(String memberId, String password) {
+        return memberRepository.loginMember(memberId,password)
+                .map(MemberDto.Response::toDto)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+    }
 }
