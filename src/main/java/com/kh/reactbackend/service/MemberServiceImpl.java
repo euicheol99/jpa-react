@@ -30,9 +30,21 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto.Response loginMember(String memberId, String password) {
-        return memberRepository.loginMember(memberId,password)
+    public MemberDto.Response loginMember(MemberDto.LoginRequest request) {
+        return memberRepository.loginMember(request)
                 .map(MemberDto.Response::toDto)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+    }
+
+    @Override
+    public MemberDto.Response updateMember(MemberDto.updateMember updateMember){
+        Member member = memberRepository.findMember(updateMember.getMember_id())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+        member.updateMember(
+                updateMember.getPassword(),
+                updateMember.getName(),
+                updateMember.getEmail()
+        );
+        return MemberDto.Response.toDto(member);
     }
 }

@@ -1,5 +1,6 @@
 package com.kh.reactbackend.repository;
 
+import com.kh.reactbackend.dto.MemberDto;
 import com.kh.reactbackend.entity.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,12 +26,12 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public Optional<Member> loginMember(String memberId, String password) {
+    public Optional<Member> loginMember(MemberDto.LoginRequest request) {
         String query = "select m from Member as m where m.id = :memberId and m.password = :password";
-        Member member = em.createQuery(query, Member.class)
-                .setParameter("memberId", memberId)
-                .setParameter("password", password)
-                .getSingleResult();
-        return null;
+
+        return Optional.ofNullable(em.createQuery(query, Member.class)
+                .setParameter("memberId", request.getMember_id())
+                .setParameter("password", request.getPassword())
+                .getSingleResult());
     }
 }

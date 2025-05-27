@@ -36,4 +36,10 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     List<Comment> comments = new ArrayList<>();
 
+    public void updateMember(String password, String name, String email){
+        this.password = password;
+        this.name = name;
+        this.email = email;
+    }
+
 }

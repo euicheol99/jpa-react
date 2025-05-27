@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,9 +37,11 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Page<PostDto.Response> getPostList(Pageable pageable) {
-        Page<Post> page = postRepository.getPosts(pageable);
-        return page.map(PostDto.Response::toSimpleDto);
+    public List<PostDto.Response> getPostList() {
+        List<Post> posts = postRepository.getPosts();
+        return posts.stream()
+                .map(PostDto.Response::toSimpleDto) // Post → DTO 변환
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -47,4 +50,10 @@ public class PostServiceImpl implements PostService{
     }
 
 
+    @Override
+    public PostDto.Response getPost(Long id){
+        Post post = postRepository.getPost(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+        return PostDto.Response.toSimpleDto(post);
+    }
 }

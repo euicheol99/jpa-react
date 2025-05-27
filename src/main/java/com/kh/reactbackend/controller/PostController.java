@@ -28,9 +28,13 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<PostDto.Response>> getAllPosts(@PageableDefault(size = 10, sort = "createDate",
-                                                    direction = Sort.Direction.DESC) Pageable pageable){
-        return ResponseEntity.ok(new PageResponse<>(postService.getPostList(pageable)));
+    public ResponseEntity<List<PostDto.Response>> getAllPosts(){
+        return ResponseEntity.ok(postService.getPostList());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto.Response> getPost(@PathVariable Long id){
+        return ResponseEntity.ok(postService.getPost(id));
     }
 
     @DeleteMapping("/{id}")

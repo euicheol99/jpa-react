@@ -41,8 +41,8 @@ public class PostDto {
         private String post_title;
         private String member_id;
         private String content;
-        private LocalDateTime created_date;
-        private List<Comment> comments = new ArrayList<>();
+        private LocalDateTime create_date;
+        private List<CommentDto.Response> comments;
 
         public static Response toSimpleDto(Post post) {
             return Response.builder()
@@ -50,6 +50,13 @@ public class PostDto {
                     .stack(post.getStack())
                     .post_title(post.getPostTitle())
                     .member_id(post.getMember().getMemberId())
+                    .create_date(post.getCreateDate())
+                    .content(post.getContent())
+                    .comments(
+                            post.getComments().stream()
+                                    .map(CommentDto.Response::toSimpleDto)
+                                    .toList() // Java 16+ or use .collect(Collectors.toList()) for older versions
+                    )
                     .build();
         }
     }

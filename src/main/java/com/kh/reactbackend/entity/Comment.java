@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @DynamicUpdate
-@DynamicInsert
 public class Comment {
 
     @Id
@@ -35,9 +34,12 @@ public class Comment {
     @JoinColumn(name = "USER_ID")
     private Member member;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createDate = LocalDateTime.now();
+    public void changeMember(Member member) {
+        this.member = member;
+    }
+
+    public void changePost(Post post) {
+        this.post = post;
     }
 
 }

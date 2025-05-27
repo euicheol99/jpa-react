@@ -48,4 +48,24 @@ public class MemberDto {
                     .build();
         }
     }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class LoginRequest{
+        private String member_id;
+        private String password;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class updateMember{
+        private String member_id;
+        private String password;
+        private String name;
+        private String email;
+    }
 }

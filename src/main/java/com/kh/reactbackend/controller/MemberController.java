@@ -27,10 +27,14 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findMember(memberId));
     }
 
-    @GetMapping("/{memberId}/{password}")
-    public ResponseEntity<MemberDto.Response> loginMember(@PathVariable String memberId, @PathVariable String password) {
-        return ResponseEntity.ok(memberService.loginMember(memberId,password));
+    @PostMapping("/login")
+    public ResponseEntity<MemberDto.Response> loginMember(@RequestBody MemberDto.LoginRequest request) {
+        return ResponseEntity.ok(memberService.loginMember(request));
     }
 
+    @PutMapping("/{memberId}")
+    public ResponseEntity<MemberDto.Response> updateMember(@RequestBody MemberDto.updateMember updateMember ) {
+        return ResponseEntity.ok(memberService.updateMember(updateMember));
+    }
 
 }

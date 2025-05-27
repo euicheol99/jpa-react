@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PostService {
     Post createPost(PostDto.Create create);
-    Page<PostDto.Response> getPostList(Pageable pageable);
+    List<PostDto.Response> getPostList();
+    PostDto.Response getPost(Long id);
     void deletePost(Long id);
 }
