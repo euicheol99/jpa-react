@@ -60,4 +60,23 @@ public class PostDto {
                     .build();
         }
     }
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor
+    public static class Update{
+        private String post_title;
+        private String stack;
+        private String content;
+
+        public static Post toEntity(Post post){
+            return Post.builder()
+                    .postTitle(post.getPostTitle())
+                    .stack(post.getStack())
+                    .content(post.getContent())
+                    .build();
+        }
+    }
+
 }

@@ -56,4 +56,16 @@ public class PostServiceImpl implements PostService{
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
         return PostDto.Response.toSimpleDto(post);
     }
+
+    @Override
+    public Post updatePost(Long id, PostDto.Update updateDto) {
+        Post post = postRepository.getPost(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+
+        post.setPostTitle(updateDto.getPost_title());
+        post.setStack(updateDto.getStack());
+        post.setContent(updateDto.getContent());
+        return post;
+    }
+
 }

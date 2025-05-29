@@ -12,4 +12,5 @@ public interface PostService {
     List<PostDto.Response> getPostList();
     PostDto.Response getPost(Long id);
     void deletePost(Long id);
+    Post updatePost(Long id, PostDto.Update updateDto);
 }
